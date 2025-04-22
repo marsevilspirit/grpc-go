@@ -25,10 +25,10 @@ import (
 	"fmt"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/xds/internal/clients"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/keepalive"
+	"github.com/dubbogo/grpc-go/xds/internal/clients"
 )
 
 // ServerIdentifierExtension holds settings for connecting to a gRPC server,

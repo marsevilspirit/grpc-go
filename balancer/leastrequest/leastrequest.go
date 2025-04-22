@@ -26,14 +26,14 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/endpointsharding"
-	"google.golang.org/grpc/balancer/pickfirst/pickfirstleaf"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/balancer/endpointsharding"
+	"github.com/dubbogo/grpc-go/balancer/pickfirst/pickfirstleaf"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/grpclog"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 )
 
 // Name is the name of the least request balancer.

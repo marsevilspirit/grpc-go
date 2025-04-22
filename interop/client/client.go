@@ -36,23 +36,23 @@ import (
 	"time"
 
 	"golang.org/x/oauth2"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/alts"
-	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/oauth"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/testdata"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/credentials/alts"
+	"github.com/dubbogo/grpc-go/credentials/google"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/credentials/oauth"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/interop"
+	"github.com/dubbogo/grpc-go/metadata"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/testdata"
 
-	_ "google.golang.org/grpc/balancer/grpclb"      // Register the grpclb load balancing policy.
-	_ "google.golang.org/grpc/balancer/rls"         // Register the RLS load balancing policy.
-	_ "google.golang.org/grpc/xds/googledirectpath" // Register xDS resolver required for c2p directpath.
+	_ "github.com/dubbogo/grpc-go/balancer/grpclb"      // Register the grpclb load balancing policy.
+	_ "github.com/dubbogo/grpc-go/balancer/rls"         // Register the RLS load balancing policy.
+	_ "github.com/dubbogo/grpc-go/xds/googledirectpath" // Register xDS resolver required for c2p directpath.
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
 )
 
 const (
@@ -124,7 +124,7 @@ const (
 )
 
 // Parses the --additional_metadata flag and returns metadata to send on each RPC,
-// formatted as per https://pkg.go.dev/google.golang.org/grpc/metadata#Pairs.
+// formatted as per https://pkg.go.dev/github.com/dubbogo/grpc-go/metadata#Pairs.
 // Allow any character but semicolons in values. If the flag is empty, return a nil map.
 func parseAdditionalMetadataFlag() []string {
 	if len(*additionalMetadata) == 0 {

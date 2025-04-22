@@ -21,13 +21,13 @@ package protoconv
 import (
 	"time"
 
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/internal/channelz"
+	"github.com/dubbogo/grpc-go/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
+	channelzpb "github.com/dubbogo/grpc-go/channelz/grpc_channelz_v1"
 )
 
 func connectivityStateToProto(s *connectivity.State) *channelzpb.ChannelConnectivityState {

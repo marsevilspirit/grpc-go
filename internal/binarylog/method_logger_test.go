@@ -26,9 +26,9 @@ import (
 	"testing"
 	"time"
 
-	binlogpb "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	binlogpb "github.com/dubbogo/grpc-go/binarylog/grpc_binarylog_v1"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/status"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/durationpb"
 )

@@ -20,7 +20,7 @@
 //
 // To install grpclb balancer, import this package as:
 //
-//	import _ "google.golang.org/grpc/balancer/grpclb"
+//	import _ "github.com/dubbogo/grpc-go/balancer/grpclb"
 package grpclb
 
 import (
@@ -30,23 +30,23 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
-	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/backoff"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/internal/resolver/dns"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/balancer/base"
+	grpclbstate "github.com/dubbogo/grpc-go/balancer/grpclb/state"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/backoff"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/internal/pretty"
+	"github.com/dubbogo/grpc-go/internal/resolver/dns"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/resolver/manual"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	lbpb "google.golang.org/grpc/balancer/grpclb/grpc_lb_v1"
+	lbpb "github.com/dubbogo/grpc-go/balancer/grpclb/grpc_lb_v1"
 )
 
 const (

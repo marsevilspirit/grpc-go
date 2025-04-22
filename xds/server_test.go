@@ -33,22 +33,22 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/uuid"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/credentials/xds"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	"github.com/dubbogo/grpc-go/credentials/xds"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource/version"
 
 	v3listenerpb "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 
-	_ "google.golang.org/grpc/xds/internal/httpfilter/router" // Register the router filter
+	_ "github.com/dubbogo/grpc-go/xds/internal/httpfilter/router" // Register the router filter
 )
 
 const (

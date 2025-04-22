@@ -25,10 +25,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	xdsinternal "google.golang.org/grpc/internal/credentials/xds"
-	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	xdsinternal "github.com/dubbogo/grpc-go/internal/credentials/xds"
+	"github.com/dubbogo/grpc-go/internal/transport"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 // connWrapper is a thin wrapper around a net.Conn returned by Accept(). It

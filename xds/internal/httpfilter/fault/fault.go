@@ -29,11 +29,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc/codes"
-	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/httpfilter"
+	"github.com/dubbogo/grpc-go/codes"
+	iresolver "github.com/dubbogo/grpc-go/internal/resolver"
+	"github.com/dubbogo/grpc-go/metadata"
+	"github.com/dubbogo/grpc-go/status"
+	"github.com/dubbogo/grpc-go/xds/internal/httpfilter"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 

@@ -23,17 +23,17 @@ import (
 	"fmt"
 	"sort"
 
-	"google.golang.org/grpc/internal/balancer/weight"
-	"google.golang.org/grpc/internal/hierarchy"
-	internalserviceconfig "google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/ringhash"
-	"google.golang.org/grpc/xds/internal"
-	"google.golang.org/grpc/xds/internal/balancer/clusterimpl"
-	"google.golang.org/grpc/xds/internal/balancer/outlierdetection"
-	"google.golang.org/grpc/xds/internal/balancer/priority"
-	"google.golang.org/grpc/xds/internal/balancer/wrrlocality"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/internal/balancer/weight"
+	"github.com/dubbogo/grpc-go/internal/hierarchy"
+	internalserviceconfig "github.com/dubbogo/grpc-go/internal/serviceconfig"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/resolver/ringhash"
+	"github.com/dubbogo/grpc-go/xds/internal"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/clusterimpl"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/outlierdetection"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/priority"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/wrrlocality"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 const million = 1000000

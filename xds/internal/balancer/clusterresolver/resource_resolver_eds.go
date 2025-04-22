@@ -21,9 +21,9 @@ package clusterresolver
 import (
 	"sync"
 
-	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/internal/grpcsync"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 type edsDiscoveryMechanism struct {

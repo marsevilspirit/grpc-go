@@ -27,9 +27,9 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/metadata"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/metadata"
 
 	"github.com/google/go-cmp/cmp"
 	"go.opentelemetry.io/otel/attribute"

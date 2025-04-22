@@ -24,14 +24,14 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/balancer/stub"
-	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/internal/testutils"
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/internal/balancer/stub"
+	"github.com/dubbogo/grpc-go/internal/stubserver"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
 )
 
 // TestProducerStopsBeforeStateChange confirms that producers are stopped before

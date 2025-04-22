@@ -29,17 +29,17 @@ import (
 	"time"
 
 	xxhash "github.com/cespare/xxhash/v2"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"
-	iringhash "google.golang.org/grpc/internal/ringhash"
-	"google.golang.org/grpc/internal/serviceconfig"
-	"google.golang.org/grpc/internal/wrr"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
-	"google.golang.org/grpc/xds/internal/httpfilter"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/internal/grpcutil"
+	iresolver "github.com/dubbogo/grpc-go/internal/resolver"
+	iringhash "github.com/dubbogo/grpc-go/internal/ringhash"
+	"github.com/dubbogo/grpc-go/internal/serviceconfig"
+	"github.com/dubbogo/grpc-go/internal/wrr"
+	"github.com/dubbogo/grpc-go/metadata"
+	"github.com/dubbogo/grpc-go/status"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/clustermanager"
+	"github.com/dubbogo/grpc-go/xds/internal/httpfilter"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 const (

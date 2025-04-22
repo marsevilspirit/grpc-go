@@ -231,14 +231,14 @@ Do not use
 An example for updating metadata from a server interceptor is
 available [here](../examples/features/metadata_interceptor/server/main.go).
 
-[FromIncomingContext]: <https://pkg.go.dev/google.golang.org/grpc/metadata#FromIncomingContext>
-[SetHeader]: <https://godoc.org/google.golang.org/grpc#SetHeader>
-[SetTrailer]: https://godoc.org/google.golang.org/grpc#SetTrailer
-[FromOutgoingContext]: https://pkg.go.dev/google.golang.org/grpc/metadata#FromOutgoingContext
-[ServerStream]: https://godoc.org/google.golang.org/grpc#ServerStream
-[grpc]: https://godoc.org/google.golang.org/grpc
-[ClientStream]: https://godoc.org/google.golang.org/grpc#ClientStream
-[Header]: https://godoc.org/google.golang.org/grpc#Header
-[Trailer]: https://godoc.org/google.golang.org/grpc#Trailer
-[CallOption]: https://godoc.org/google.golang.org/grpc#CallOption
-[metadata]: https://godoc.org/google.golang.org/grpc/metadata
+[FromIncomingContext]: <https://pkg.go.dev/github.com/dubbogo/grpc-go/metadata#FromIncomingContext>
+[SetHeader]: <https://godoc.org/github.com/dubbogo/grpc-go#SetHeader>
+[SetTrailer]: https://godoc.org/github.com/dubbogo/grpc-go#SetTrailer
+[FromOutgoingContext]: https://pkg.go.dev/github.com/dubbogo/grpc-go/metadata#FromOutgoingContext
+[ServerStream]: https://godoc.org/github.com/dubbogo/grpc-go#ServerStream
+[grpc]: https://godoc.org/github.com/dubbogo/grpc-go
+[ClientStream]: https://godoc.org/github.com/dubbogo/grpc-go#ClientStream
+[Header]: https://godoc.org/github.com/dubbogo/grpc-go#Header
+[Trailer]: https://godoc.org/github.com/dubbogo/grpc-go#Trailer
+[CallOption]: https://godoc.org/github.com/dubbogo/grpc-go#CallOption
+[metadata]: https://godoc.org/github.com/dubbogo/grpc-go/metadata

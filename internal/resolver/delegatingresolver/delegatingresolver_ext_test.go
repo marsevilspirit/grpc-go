@@ -27,15 +27,15 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/proxyattributes"
-	"google.golang.org/grpc/internal/resolver/delegatingresolver"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/proxyattributes"
+	"github.com/dubbogo/grpc-go/internal/resolver/delegatingresolver"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/resolver/manual"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 
-	_ "google.golang.org/grpc/resolver/dns" // To register dns resolver.
+	_ "github.com/dubbogo/grpc-go/resolver/dns" // To register dns resolver.
 )
 
 type s struct {

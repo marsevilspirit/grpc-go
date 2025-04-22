@@ -36,8 +36,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/mem"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/mem"
 )
 
 // failTestsOnLeakedBuffers is a special flag that will cause tests to fail if

@@ -23,7 +23,7 @@ package grpclog
 import (
 	"fmt"
 
-	"google.golang.org/grpc/grpclog"
+	"github.com/dubbogo/grpc-go/grpclog"
 )
 
 // PrefixLogger does logging with a prefix.

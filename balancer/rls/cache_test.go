@@ -24,8 +24,8 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/testutils/stats"
+	"github.com/dubbogo/grpc-go/internal/backoff"
+	"github.com/dubbogo/grpc-go/internal/testutils/stats"
 )
 
 var (

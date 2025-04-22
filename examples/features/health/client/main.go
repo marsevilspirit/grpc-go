@@ -27,12 +27,12 @@ import (
 	"log"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	pb "google.golang.org/grpc/examples/features/proto/echo"
-	_ "google.golang.org/grpc/health"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	pb "github.com/dubbogo/grpc-go/examples/features/proto/echo"
+	_ "github.com/dubbogo/grpc-go/health"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/resolver/manual"
 )
 
 var serviceConfig = `{

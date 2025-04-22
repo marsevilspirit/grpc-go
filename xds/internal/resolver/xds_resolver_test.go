@@ -31,22 +31,22 @@ import (
 	"github.com/envoyproxy/go-control-plane/pkg/wellknown"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/uuid"
-	"google.golang.org/grpc/codes"
-	estats "google.golang.org/grpc/experimental/stats"
-	"google.golang.org/grpc/internal"
-	iresolver "google.golang.org/grpc/internal/resolver"
-	iringhash "google.golang.org/grpc/internal/ringhash"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/xds/internal/balancer/clustermanager"
-	"google.golang.org/grpc/xds/internal/httpfilter"
-	rinternal "google.golang.org/grpc/xds/internal/resolver/internal"
-	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"
+	"github.com/dubbogo/grpc-go/codes"
+	estats "github.com/dubbogo/grpc-go/experimental/stats"
+	"github.com/dubbogo/grpc-go/internal"
+	iresolver "github.com/dubbogo/grpc-go/internal/resolver"
+	iringhash "github.com/dubbogo/grpc-go/internal/ringhash"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/metadata"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/serviceconfig"
+	"github.com/dubbogo/grpc-go/xds/internal/balancer/clustermanager"
+	"github.com/dubbogo/grpc-go/xds/internal/httpfilter"
+	rinternal "github.com/dubbogo/grpc-go/xds/internal/resolver/internal"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource/version"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/durationpb"
@@ -61,8 +61,8 @@ import (
 	v3httppb "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	v3discoverypb "github.com/envoyproxy/go-control-plane/envoy/service/discovery/v3"
 
-	_ "google.golang.org/grpc/xds/internal/balancer/cdsbalancer" // Register the cds LB policy
-	_ "google.golang.org/grpc/xds/internal/httpfilter/router"    // Register the router filter
+	_ "github.com/dubbogo/grpc-go/xds/internal/balancer/cdsbalancer" // Register the cds LB policy
+	_ "github.com/dubbogo/grpc-go/xds/internal/httpfilter/router"    // Register the router filter
 )
 
 // Tests the case where xDS client creation is expected to fail because the

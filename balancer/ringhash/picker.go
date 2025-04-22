@@ -24,10 +24,10 @@ import (
 
 	xxhash "github.com/cespare/xxhash/v2"
 
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/connectivity"
-	iringhash "google.golang.org/grpc/internal/ringhash"
-	"google.golang.org/grpc/metadata"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/connectivity"
+	iringhash "github.com/dubbogo/grpc-go/internal/ringhash"
+	"github.com/dubbogo/grpc-go/metadata"
 )
 
 type picker struct {

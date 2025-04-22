@@ -23,12 +23,12 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource/version"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource/version"
 
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
 	v3corepb "github.com/envoyproxy/go-control-plane/envoy/config/core/v3"

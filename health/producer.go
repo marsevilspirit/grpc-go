@@ -22,12 +22,12 @@ import (
 	"context"
 	"sync"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/status"
 )
 
 func init() {

@@ -25,10 +25,10 @@ import (
 	"fmt"
 	"strings"
 
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/xds/rbac"
-	"google.golang.org/grpc/xds/internal/httpfilter"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/resolver"
+	"github.com/dubbogo/grpc-go/internal/xds/rbac"
+	"github.com/dubbogo/grpc-go/xds/internal/httpfilter"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 

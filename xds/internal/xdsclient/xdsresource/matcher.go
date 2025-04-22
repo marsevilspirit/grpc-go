@@ -22,10 +22,10 @@ import (
 	rand "math/rand/v2"
 	"strings"
 
-	"google.golang.org/grpc/internal/grpcutil"
-	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/xds/matcher"
-	"google.golang.org/grpc/metadata"
+	"github.com/dubbogo/grpc-go/internal/grpcutil"
+	iresolver "github.com/dubbogo/grpc-go/internal/resolver"
+	"github.com/dubbogo/grpc-go/internal/xds/matcher"
+	"github.com/dubbogo/grpc-go/metadata"
 )
 
 // RouteToMatcher converts a route to a Matcher to match incoming RPC's against.

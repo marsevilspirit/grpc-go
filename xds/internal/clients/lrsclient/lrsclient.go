@@ -21,7 +21,7 @@
 // See: https://www.envoyproxy.io/docs/envoy/latest/api-v3/service/load_stats/v3/lrs.proto
 package lrsclient
 
-import "google.golang.org/grpc/xds/internal/clients"
+import "github.com/dubbogo/grpc-go/xds/internal/clients"
 
 // LRSClient is an LRS (Load Reporting Service) client.
 type LRSClient struct {

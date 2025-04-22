@@ -21,10 +21,10 @@ package xds
 import (
 	"net"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
 )
 
 type serverOptions struct {

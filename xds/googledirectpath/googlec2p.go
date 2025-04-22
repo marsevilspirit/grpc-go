@@ -33,15 +33,15 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/googlecloud"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
+	"github.com/dubbogo/grpc-go/internal/googlecloud"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
 
-	_ "google.golang.org/grpc/xds" // To register xds resolvers and balancers.
+	_ "github.com/dubbogo/grpc-go/xds" // To register xds resolvers and balancers.
 )
 
 const (

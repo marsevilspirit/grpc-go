@@ -27,9 +27,9 @@ import (
 	"net/url"
 	"os"
 
-	"google.golang.org/grpc/grpclog"
-	credinternal "google.golang.org/grpc/internal/credentials"
-	"google.golang.org/grpc/internal/envconfig"
+	"github.com/dubbogo/grpc-go/grpclog"
+	credinternal "github.com/dubbogo/grpc-go/internal/credentials"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
 )
 
 const alpnFailureHelpMessage = "If you upgraded from a grpc-go version earlier than 1.67, your TLS connections may have stopped working due to ALPN enforcement. For more details, see: https://github.com/grpc/grpc-go/issues/434"

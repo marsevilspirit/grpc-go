@@ -30,27 +30,27 @@ import (
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/balancer/pickfirst"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/connectivity"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/channelz"
-	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/idle"
-	iresolver "google.golang.org/grpc/internal/resolver"
-	"google.golang.org/grpc/internal/stats"
-	"google.golang.org/grpc/internal/transport"
-	"google.golang.org/grpc/keepalive"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/balancer/base"
+	"github.com/dubbogo/grpc-go/balancer/pickfirst"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/connectivity"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/channelz"
+	"github.com/dubbogo/grpc-go/internal/grpcsync"
+	"github.com/dubbogo/grpc-go/internal/idle"
+	iresolver "github.com/dubbogo/grpc-go/internal/resolver"
+	"github.com/dubbogo/grpc-go/internal/stats"
+	"github.com/dubbogo/grpc-go/internal/transport"
+	"github.com/dubbogo/grpc-go/keepalive"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/serviceconfig"
+	"github.com/dubbogo/grpc-go/status"
 
-	_ "google.golang.org/grpc/balancer/roundrobin"           // To register roundrobin.
-	_ "google.golang.org/grpc/internal/resolver/passthrough" // To register passthrough resolver.
-	_ "google.golang.org/grpc/internal/resolver/unix"        // To register unix resolver.
-	_ "google.golang.org/grpc/resolver/dns"                  // To register dns resolver.
+	_ "github.com/dubbogo/grpc-go/balancer/roundrobin"           // To register roundrobin.
+	_ "github.com/dubbogo/grpc-go/internal/resolver/passthrough" // To register passthrough resolver.
+	_ "github.com/dubbogo/grpc-go/internal/resolver/unix"        // To register unix resolver.
+	_ "github.com/dubbogo/grpc-go/resolver/dns"                  // To register dns resolver.
 )
 
 const (

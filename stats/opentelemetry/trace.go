@@ -22,8 +22,8 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	otelcodes "go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc/stats"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go/stats"
+	"github.com/dubbogo/grpc-go/status"
 )
 
 // populateSpan populates span information based on stats passed in, representing

@@ -24,8 +24,8 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	oteltrace "go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc/metadata"
-	itracing "google.golang.org/grpc/stats/opentelemetry/internal/tracing"
+	"github.com/dubbogo/grpc-go/metadata"
+	itracing "github.com/dubbogo/grpc-go/stats/opentelemetry/internal/tracing"
 )
 
 var validSpanContext = oteltrace.SpanContext{}.WithTraceID(

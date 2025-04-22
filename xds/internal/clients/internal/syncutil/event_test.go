@@ -21,7 +21,7 @@ package syncutil
 import (
 	"testing"
 
-	"google.golang.org/grpc/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
 )
 
 type s struct {

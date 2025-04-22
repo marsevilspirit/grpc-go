@@ -25,7 +25,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	cpb "google.golang.org/genproto/googleapis/rpc/code"
-	"google.golang.org/grpc/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
 )
 
 type s struct {

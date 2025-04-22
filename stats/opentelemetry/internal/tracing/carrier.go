@@ -23,8 +23,8 @@ package tracing
 import (
 	"context"
 
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/metadata"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/metadata"
 )
 
 var logger = grpclog.Component("otel-plugin")

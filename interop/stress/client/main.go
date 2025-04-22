@@ -32,21 +32,21 @@ import (
 	"sync/atomic"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/interop"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/status"
-	"google.golang.org/grpc/testdata"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/credentials/google"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/interop"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/status"
+	"github.com/dubbogo/grpc-go/testdata"
 
-	_ "google.golang.org/grpc/xds/googledirectpath" // Register xDS resolver required for c2p directpath.
+	_ "github.com/dubbogo/grpc-go/xds/googledirectpath" // Register xDS resolver required for c2p directpath.
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	metricspb "google.golang.org/grpc/interop/stress/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
+	metricspb "github.com/dubbogo/grpc-go/interop/stress/grpc_testing"
 )
 
 const (

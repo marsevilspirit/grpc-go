@@ -23,7 +23,7 @@ import (
 	"net"
 	"sync/atomic"
 
-	"google.golang.org/grpc/credentials"
+	"github.com/dubbogo/grpc-go/credentials"
 )
 
 // SocketMetrics defines the struct that the implementor of Socket interface

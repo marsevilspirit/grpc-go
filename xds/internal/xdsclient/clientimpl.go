@@ -27,17 +27,17 @@ import (
 	"time"
 
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	estats "google.golang.org/grpc/experimental/stats"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/backoff"
-	"google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	xdsclientinternal "google.golang.org/grpc/xds/internal/xdsclient/internal"
-	"google.golang.org/grpc/xds/internal/xdsclient/transport"
-	"google.golang.org/grpc/xds/internal/xdsclient/transport/ads"
-	"google.golang.org/grpc/xds/internal/xdsclient/transport/grpctransport"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	estats "github.com/dubbogo/grpc-go/experimental/stats"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/backoff"
+	"github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/internal/grpcsync"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	xdsclientinternal "github.com/dubbogo/grpc-go/xds/internal/xdsclient/internal"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/transport"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/transport/ads"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/transport/grpctransport"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 const (

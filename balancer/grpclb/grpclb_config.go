@@ -21,9 +21,9 @@ package grpclb
 import (
 	"encoding/json"
 
-	"google.golang.org/grpc/balancer/pickfirst"
-	"google.golang.org/grpc/balancer/roundrobin"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go/balancer/pickfirst"
+	"github.com/dubbogo/grpc-go/balancer/roundrobin"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 )
 
 const (

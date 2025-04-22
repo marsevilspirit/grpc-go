@@ -35,11 +35,11 @@ import (
 	otelresource "go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.24.0"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/examples/features/proto/echo"
-	oteltracing "google.golang.org/grpc/experimental/opentelemetry"
-	"google.golang.org/grpc/stats/opentelemetry"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/examples/features/proto/echo"
+	oteltracing "github.com/dubbogo/grpc-go/experimental/opentelemetry"
+	"github.com/dubbogo/grpc-go/stats/opentelemetry"
 )
 
 var (

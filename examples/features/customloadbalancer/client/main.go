@@ -26,15 +26,15 @@ import (
 	"strings"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	_ "google.golang.org/grpc/examples/features/customloadbalancer/client/customroundrobin" // To register custom_round_robin.
-	pb "google.golang.org/grpc/examples/features/proto/echo"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	_ "github.com/dubbogo/grpc-go/examples/features/customloadbalancer/client/customroundrobin" // To register custom_round_robin.
+	pb "github.com/dubbogo/grpc-go/examples/features/proto/echo"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/peer"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/resolver/manual"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 )
 
 var (

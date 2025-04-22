@@ -22,9 +22,9 @@
 package nop
 
 import (
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/base"
-	"google.golang.org/grpc/connectivity"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/balancer/base"
+	"github.com/dubbogo/grpc-go/connectivity"
 )
 
 // bal is a balancer with all of its balancer operations as no-ops, other than

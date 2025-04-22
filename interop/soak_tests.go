@@ -26,12 +26,12 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/benchmark/stats"
-	"google.golang.org/grpc/peer"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/benchmark/stats"
+	"github.com/dubbogo/grpc-go/peer"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
+	testpb "github.com/dubbogo/grpc-go/interop/grpc_testing"
 )
 
 // SoakWorkerResults stores the aggregated results for a specific worker during the soak test.

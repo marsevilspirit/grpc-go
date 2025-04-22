@@ -30,7 +30,7 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils"
 )
 
 // ProxyServer represents a test proxy server.

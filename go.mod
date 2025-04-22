@@ -1,4 +1,4 @@
-module google.golang.org/grpc
+module github.com/dubbogo/grpc-go
 
 go 1.23.0
 
@@ -41,4 +41,5 @@ require (
 	golang.org/x/crypto v0.36.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250324211829-b45e905df463 // indirect
+	google.golang.org/grpc v1.71.0 // indirect
 )

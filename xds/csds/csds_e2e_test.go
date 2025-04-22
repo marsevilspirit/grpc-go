@@ -29,16 +29,16 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/uuid"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/pretty"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/xds/csds"
-	"google.golang.org/grpc/xds/internal/xdsclient"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/pretty"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/xds/csds"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -52,7 +52,7 @@ import (
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 	v3statuspbgrpc "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
 
-	_ "google.golang.org/grpc/xds/internal/httpfilter/router" // Register the router filter
+	_ "github.com/dubbogo/grpc-go/xds/internal/httpfilter/router" // Register the router filter
 )
 
 const defaultTestTimeout = 5 * time.Second

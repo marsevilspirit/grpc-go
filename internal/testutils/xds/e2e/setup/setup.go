@@ -23,10 +23,10 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/resolver"
-	_ "google.golang.org/grpc/xds" // Register the xds_resolver.
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/resolver"
+	_ "github.com/dubbogo/grpc-go/xds" // Register the xds_resolver.
 )
 
 // ManagementServerAndResolver sets up an xDS management server, creates

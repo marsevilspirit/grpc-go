@@ -26,10 +26,10 @@ import (
 	"net/url"
 	"sync"
 
-	"google.golang.org/grpc/grpclog"
-	"google.golang.org/grpc/internal/proxyattributes"
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go/grpclog"
+	"github.com/dubbogo/grpc-go/internal/proxyattributes"
+	"github.com/dubbogo/grpc-go/resolver"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 )
 
 var (

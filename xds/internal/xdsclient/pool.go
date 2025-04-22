@@ -24,10 +24,10 @@ import (
 	"time"
 
 	v3statuspb "github.com/envoyproxy/go-control-plane/envoy/service/status/v3"
-	estats "google.golang.org/grpc/experimental/stats"
-	"google.golang.org/grpc/internal/backoff"
-	istats "google.golang.org/grpc/internal/stats"
-	"google.golang.org/grpc/internal/xds/bootstrap"
+	estats "github.com/dubbogo/grpc-go/experimental/stats"
+	"github.com/dubbogo/grpc-go/internal/backoff"
+	istats "github.com/dubbogo/grpc-go/internal/stats"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
 )
 
 var (

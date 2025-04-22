@@ -21,10 +21,10 @@ package bootstrap
 import (
 	"encoding/json"
 
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/google"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/xds/bootstrap/tlscreds"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/credentials/google"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap/tlscreds"
 )
 
 func init() {

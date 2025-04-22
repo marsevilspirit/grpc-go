@@ -29,7 +29,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/security/advancedtls/testdata"
+	"github.com/dubbogo/grpc-go/security/advancedtls/testdata"
 )
 
 // TestStaticCRLProvider tests how StaticCRLProvider handles the major four

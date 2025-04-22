@@ -25,11 +25,11 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/credentials"
-	icredentials "google.golang.org/grpc/internal/credentials"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/xds"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go/credentials"
+	icredentials "github.com/dubbogo/grpc-go/internal/credentials"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/xds"
+	"github.com/dubbogo/grpc-go/resolver"
 )
 
 var defaultTestTimeout = 10 * time.Second

@@ -23,7 +23,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
 )
 
 const (

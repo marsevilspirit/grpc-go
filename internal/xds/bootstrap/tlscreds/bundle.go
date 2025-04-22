@@ -32,10 +32,10 @@ import (
 	"time"
 
 	"github.com/spiffe/go-spiffe/v2/bundle/spiffebundle"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
-	"google.golang.org/grpc/internal/credentials/spiffe"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider/pemfile"
+	"github.com/dubbogo/grpc-go/internal/credentials/spiffe"
 )
 
 // bundle is an implementation of credentials.Bundle which implements mTLS

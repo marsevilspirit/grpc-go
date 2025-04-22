@@ -22,9 +22,9 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/channelz"
+	"github.com/dubbogo/grpc-go/internal/channelz"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
 )
 
 func (s) TestCZSocketMetricsSocketOption(t *testing.T) {

@@ -27,10 +27,10 @@ import (
 	"time"
 
 	epb "google.golang.org/genproto/googleapis/rpc/errdetails"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	pb "github.com/dubbogo/grpc-go/examples/helloworld/helloworld"
+	"github.com/dubbogo/grpc-go/status"
 )
 
 var addr = flag.String("addr", "localhost:50052", "the address to connect to")

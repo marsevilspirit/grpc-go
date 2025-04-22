@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"strings"
 
-	"google.golang.org/grpc/xds/internal/clients"
+	"github.com/dubbogo/grpc-go/xds/internal/clients"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/structpb"
 

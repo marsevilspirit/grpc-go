@@ -28,7 +28,7 @@ package bootstrap
 import (
 	"encoding/json"
 
-	"google.golang.org/grpc/credentials"
+	"github.com/dubbogo/grpc-go/credentials"
 )
 
 // registry is a map from credential type name to Credential builder.

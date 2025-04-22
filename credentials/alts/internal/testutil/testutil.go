@@ -28,10 +28,10 @@ import (
 	"sync"
 	"time"
 
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials/alts/internal/conn"
-	altsgrpc "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
-	altspb "google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp"
+	"github.com/dubbogo/grpc-go/codes"
+	"github.com/dubbogo/grpc-go/credentials/alts/internal/conn"
+	altsgrpc "github.com/dubbogo/grpc-go/credentials/alts/internal/proto/grpc_gcp"
+	altspb "github.com/dubbogo/grpc-go/credentials/alts/internal/proto/grpc_gcp"
 )
 
 // Stats is used to collect statistics about concurrent handshake calls.

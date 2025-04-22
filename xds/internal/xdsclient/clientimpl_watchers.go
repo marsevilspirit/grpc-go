@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc/xds/internal/xdsclient/transport/ads"
-	"google.golang.org/grpc/xds/internal/xdsclient/xdsresource"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/transport/ads"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/xdsresource"
 )
 
 // wrappingWatcher is a wrapper around an xdsresource.ResourceWatcher that adds

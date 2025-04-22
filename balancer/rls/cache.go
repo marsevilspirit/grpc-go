@@ -23,10 +23,10 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	estats "google.golang.org/grpc/experimental/stats"
-	"google.golang.org/grpc/internal/backoff"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/internal/grpcsync"
+	estats "github.com/dubbogo/grpc-go/experimental/stats"
+	"github.com/dubbogo/grpc-go/internal/backoff"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/internal/grpcsync"
 )
 
 // cacheKey represents the key used to uniquely identify an entry in the data

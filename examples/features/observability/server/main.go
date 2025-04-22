@@ -31,9 +31,9 @@ import (
 	"syscall"
 	"time"
 
-	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
-	"google.golang.org/grpc/gcp/observability"
+	"github.com/dubbogo/grpc-go"
+	pb "github.com/dubbogo/grpc-go/examples/helloworld/helloworld"
+	"github.com/dubbogo/grpc-go/gcp/observability"
 )
 
 var (

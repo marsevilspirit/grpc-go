@@ -27,8 +27,8 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/authz/audit"
-	"google.golang.org/grpc/internal/grpctest"
+	"github.com/dubbogo/grpc-go/authz/audit"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
 )
 
 type s struct {

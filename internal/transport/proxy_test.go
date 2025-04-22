@@ -29,10 +29,10 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc/internal/proxyattributes"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/proxyserver"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go/internal/proxyattributes"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/proxyserver"
+	"github.com/dubbogo/grpc-go/resolver"
 )
 
 func (s) TestHTTPConnectWithServerHello(t *testing.T) {

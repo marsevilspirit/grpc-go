@@ -24,17 +24,17 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"
-	_ "google.golang.org/grpc/balancer/leastrequest"       // To register least_request
-	_ "google.golang.org/grpc/balancer/weightedroundrobin" // To register weighted_round_robin
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/internal/testutils/roundrobin"
-	"google.golang.org/grpc/internal/testutils/xds/e2e"
-	"google.golang.org/grpc/internal/testutils/xds/e2e/setup"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go"
+	_ "github.com/dubbogo/grpc-go/balancer/leastrequest"       // To register least_request
+	_ "github.com/dubbogo/grpc-go/balancer/weightedroundrobin" // To register weighted_round_robin
+	"github.com/dubbogo/grpc-go/credentials/insecure"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
+	"github.com/dubbogo/grpc-go/internal/stubserver"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/internal/testutils/roundrobin"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e"
+	"github.com/dubbogo/grpc-go/internal/testutils/xds/e2e/setup"
+	"github.com/dubbogo/grpc-go/resolver"
 
 	v3xdsxdstypepb "github.com/cncf/xds/go/xds/type/v3"
 	v3clusterpb "github.com/envoyproxy/go-control-plane/envoy/config/cluster/v3"
@@ -46,7 +46,7 @@ import (
 	v3leastrequestpb "github.com/envoyproxy/go-control-plane/envoy/extensions/load_balancing_policies/least_request/v3"
 	v3roundrobinpb "github.com/envoyproxy/go-control-plane/envoy/extensions/load_balancing_policies/round_robin/v3"
 	v3wrrlocalitypb "github.com/envoyproxy/go-control-plane/envoy/extensions/load_balancing_policies/wrr_locality/v3"
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/structpb"

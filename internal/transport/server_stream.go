@@ -25,9 +25,9 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"google.golang.org/grpc/mem"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
+	"github.com/dubbogo/grpc-go/mem"
+	"github.com/dubbogo/grpc-go/metadata"
+	"github.com/dubbogo/grpc-go/status"
 )
 
 // ServerStream implements streaming functionality for a gRPC server.

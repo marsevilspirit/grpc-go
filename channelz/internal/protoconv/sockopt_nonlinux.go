@@ -22,8 +22,8 @@
 package protoconv
 
 import (
-	channelzpb "google.golang.org/grpc/channelz/grpc_channelz_v1"
-	"google.golang.org/grpc/internal/channelz"
+	channelzpb "github.com/dubbogo/grpc-go/channelz/grpc_channelz_v1"
+	"github.com/dubbogo/grpc-go/internal/channelz"
 )
 
 func sockoptToProto(_ *channelz.SocketOptionData) []*channelzpb.SocketOption {

@@ -20,7 +20,7 @@
 // which encapsulate all the state needed by a client to authenticate with a
 // server and make various assertions, e.g., about the client's identity, role,
 // or whether it is authorized to make a particular call.
-package credentials // import "google.golang.org/grpc/credentials"
+package credentials // import "github.com/dubbogo/grpc-go/credentials"
 
 import (
 	"context"
@@ -28,8 +28,8 @@ import (
 	"fmt"
 	"net"
 
-	"google.golang.org/grpc/attributes"
-	icredentials "google.golang.org/grpc/internal/credentials"
+	"github.com/dubbogo/grpc-go/attributes"
+	icredentials "github.com/dubbogo/grpc-go/internal/credentials"
 	"google.golang.org/protobuf/proto"
 )
 

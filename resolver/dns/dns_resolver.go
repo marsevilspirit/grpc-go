@@ -23,8 +23,8 @@ package dns
 import (
 	"time"
 
-	"google.golang.org/grpc/internal/resolver/dns"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go/internal/resolver/dns"
+	"github.com/dubbogo/grpc-go/resolver"
 )
 
 // SetResolvingTimeout sets the maximum duration for DNS resolution requests.

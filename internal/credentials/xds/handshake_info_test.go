@@ -26,8 +26,8 @@ import (
 	"regexp"
 	"testing"
 
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/internal/xds/matcher"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	"github.com/dubbogo/grpc-go/internal/xds/matcher"
 )
 
 type testCertProvider struct {

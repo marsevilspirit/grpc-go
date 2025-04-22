@@ -22,7 +22,7 @@ import (
 	"os"
 	"testing"
 
-	"google.golang.org/grpc/internal/envconfig"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
 )
 
 // CreateBootstrapFileForTesting creates a temporary file with the provided

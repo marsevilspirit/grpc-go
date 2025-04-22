@@ -30,19 +30,19 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/balancer"
-	grpclbstate "google.golang.org/grpc/balancer/grpclb/state"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/envconfig"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/resolver/dns"
-	dnsinternal "google.golang.org/grpc/internal/resolver/dns/internal"
-	"google.golang.org/grpc/internal/testutils"
-	"google.golang.org/grpc/resolver"
-	dnspublic "google.golang.org/grpc/resolver/dns"
-	"google.golang.org/grpc/serviceconfig"
+	"github.com/dubbogo/grpc-go/balancer"
+	grpclbstate "github.com/dubbogo/grpc-go/balancer/grpclb/state"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/envconfig"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/resolver/dns"
+	dnsinternal "github.com/dubbogo/grpc-go/internal/resolver/dns/internal"
+	"github.com/dubbogo/grpc-go/internal/testutils"
+	"github.com/dubbogo/grpc-go/resolver"
+	dnspublic "github.com/dubbogo/grpc-go/resolver/dns"
+	"github.com/dubbogo/grpc-go/serviceconfig"
 
-	_ "google.golang.org/grpc" // To initialize internal.ParseServiceConfig
+	_ "github.com/dubbogo/grpc-go" // To initialize internal.ParseServiceConfig
 )
 
 const (

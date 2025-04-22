@@ -24,13 +24,13 @@ import (
 	"strings"
 	"time"
 
-	"google.golang.org/grpc/grpclog"
-	igrpclog "google.golang.org/grpc/internal/grpclog"
-	"google.golang.org/grpc/xds/internal/clients"
-	"google.golang.org/grpc/xds/internal/clients/internal"
-	"google.golang.org/grpc/xds/internal/clients/internal/backoff"
-	"google.golang.org/grpc/xds/internal/clients/internal/syncutil"
-	"google.golang.org/grpc/xds/internal/clients/xdsclient/internal/xdsresource"
+	"github.com/dubbogo/grpc-go/grpclog"
+	igrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
+	"github.com/dubbogo/grpc-go/xds/internal/clients"
+	"github.com/dubbogo/grpc-go/xds/internal/clients/internal"
+	"github.com/dubbogo/grpc-go/xds/internal/clients/internal/backoff"
+	"github.com/dubbogo/grpc-go/xds/internal/clients/internal/syncutil"
+	"github.com/dubbogo/grpc-go/xds/internal/clients/xdsclient/internal/xdsresource"
 )
 
 const (

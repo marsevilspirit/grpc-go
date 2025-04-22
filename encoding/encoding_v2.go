@@ -21,7 +21,7 @@ package encoding
 import (
 	"strings"
 
-	"google.golang.org/grpc/mem"
+	"github.com/dubbogo/grpc-go/mem"
 )
 
 // CodecV2 defines the interface gRPC uses to encode and decode messages. Note

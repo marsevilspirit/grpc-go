@@ -28,11 +28,11 @@ import (
 	"strings"
 	"unsafe"
 
-	"google.golang.org/grpc/attributes"
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/xds/matcher"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go/attributes"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/xds/matcher"
+	"github.com/dubbogo/grpc-go/resolver"
 )
 
 func init() {

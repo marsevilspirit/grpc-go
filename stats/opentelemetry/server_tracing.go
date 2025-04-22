@@ -21,8 +21,8 @@ import (
 	"strings"
 
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
-	otelinternaltracing "google.golang.org/grpc/stats/opentelemetry/internal/tracing"
+	"github.com/dubbogo/grpc-go"
+	otelinternaltracing "github.com/dubbogo/grpc-go/stats/opentelemetry/internal/tracing"
 )
 
 // traceTagRPC populates context with new span data using the TextMapPropagator

@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	estats "google.golang.org/grpc/experimental/stats"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/grpctest"
+	estats "github.com/dubbogo/grpc-go/experimental/stats"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
 
 	"go.opentelemetry.io/otel/attribute"
 	otelmetric "go.opentelemetry.io/otel/sdk/metric"

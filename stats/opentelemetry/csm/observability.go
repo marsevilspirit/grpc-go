@@ -22,10 +22,10 @@ import (
 	"context"
 	"net/url"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/stats/opentelemetry"
-	otelinternal "google.golang.org/grpc/stats/opentelemetry/internal"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/stats/opentelemetry"
+	otelinternal "github.com/dubbogo/grpc-go/stats/opentelemetry/internal"
 )
 
 // EnableObservability sets up CSM Observability for the binary globally.

@@ -23,8 +23,8 @@ package service
 import (
 	"sync"
 
-	grpc "google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	grpc "github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/credentials/insecure"
 )
 
 var (

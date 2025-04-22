@@ -22,7 +22,7 @@ package loadstore
 import (
 	"sync"
 
-	"google.golang.org/grpc/xds/internal/xdsclient/load"
+	"github.com/dubbogo/grpc-go/xds/internal/xdsclient/load"
 )
 
 // NewWrapper creates a Wrapper.

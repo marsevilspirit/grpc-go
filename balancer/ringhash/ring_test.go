@@ -24,8 +24,8 @@ import (
 	"testing"
 
 	xxhash "github.com/cespare/xxhash/v2"
-	"google.golang.org/grpc/internal/balancer/weight"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go/internal/balancer/weight"
+	"github.com/dubbogo/grpc-go/resolver"
 )
 
 var testEndpoints []resolver.Endpoint

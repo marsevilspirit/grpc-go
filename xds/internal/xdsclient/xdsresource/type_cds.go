@@ -20,8 +20,8 @@ package xdsresource
 import (
 	"encoding/json"
 
-	"google.golang.org/grpc/internal/xds/bootstrap"
-	"google.golang.org/grpc/internal/xds/matcher"
+	"github.com/dubbogo/grpc-go/internal/xds/bootstrap"
+	"github.com/dubbogo/grpc-go/internal/xds/matcher"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 

@@ -36,9 +36,9 @@ import (
 	"reflect"
 	"time"
 
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/tls/certprovider"
-	credinternal "google.golang.org/grpc/internal/credentials"
+	"github.com/dubbogo/grpc-go/credentials"
+	"github.com/dubbogo/grpc-go/credentials/tls/certprovider"
+	credinternal "github.com/dubbogo/grpc-go/internal/credentials"
 )
 
 // CertificateChains represents a slice of certificate chains, each consisting

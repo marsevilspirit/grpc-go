@@ -22,7 +22,7 @@ import (
 	"context"
 	"testing"
 
-	"google.golang.org/grpc/connectivity"
+	"github.com/dubbogo/grpc-go/connectivity"
 )
 
 // A StateChanger reports state changes, e.g. a grpc.ClientConn.

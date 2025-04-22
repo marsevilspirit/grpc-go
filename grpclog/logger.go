@@ -18,7 +18,7 @@
 
 package grpclog
 
-import "google.golang.org/grpc/grpclog/internal"
+import "github.com/dubbogo/grpc-go/grpclog/internal"
 
 // Logger mimics golang's standard Logger as an interface.
 //

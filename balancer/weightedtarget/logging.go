@@ -21,8 +21,8 @@ package weightedtarget
 import (
 	"fmt"
 
-	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
+	"github.com/dubbogo/grpc-go/grpclog"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
 )
 
 const prefix = "[weighted-target-lb %p] "

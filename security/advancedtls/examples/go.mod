@@ -1,11 +1,11 @@
-module google.golang.org/grpc/security/advancedtls/examples
+module github.com/dubbogo/grpc-go/security/advancedtls/examples
 
 go 1.23.0
 
 require (
-	google.golang.org/grpc v1.71.1
-	google.golang.org/grpc/examples v0.0.0-20250403095317-51d6a43ec597
-	google.golang.org/grpc/security/advancedtls v1.0.0
+	github.com/dubbogo/grpc-go v1.71.1
+	github.com/dubbogo/grpc-go/examples v0.0.0-20250403095317-51d6a43ec597
+	github.com/dubbogo/grpc-go/security/advancedtls v1.0.0
 )
 
 require (
@@ -20,8 +20,8 @@ require (
 	google.golang.org/protobuf v1.36.6 // indirect
 )
 
-replace google.golang.org/grpc => ../../..
+replace github.com/dubbogo/grpc-go => ../../..
 
-replace google.golang.org/grpc/examples => ../../../examples
+replace github.com/dubbogo/grpc-go/examples => ../../../examples
 
-replace google.golang.org/grpc/security/advancedtls => ../
+replace github.com/dubbogo/grpc-go/security/advancedtls => ../

@@ -27,21 +27,21 @@ import (
 	"testing"
 	"time"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/internal"
-	"google.golang.org/grpc/internal/grpctest"
-	"google.golang.org/grpc/internal/stubserver"
-	"google.golang.org/grpc/internal/testutils/roundrobin"
-	"google.golang.org/grpc/internal/testutils/stats"
-	"google.golang.org/grpc/orca"
-	"google.golang.org/grpc/peer"
-	"google.golang.org/grpc/resolver"
+	"github.com/dubbogo/grpc-go"
+	"github.com/dubbogo/grpc-go/internal"
+	"github.com/dubbogo/grpc-go/internal/grpctest"
+	"github.com/dubbogo/grpc-go/internal/stubserver"
+	"github.com/dubbogo/grpc-go/internal/testutils/roundrobin"
+	"github.com/dubbogo/grpc-go/internal/testutils/stats"
+	"github.com/dubbogo/grpc-go/orca"
+	"github.com/dubbogo/grpc-go/peer"
+	"github.com/dubbogo/grpc-go/resolver"
 
-	wrr "google.golang.org/grpc/balancer/weightedroundrobin"
-	iwrr "google.golang.org/grpc/balancer/weightedroundrobin/internal"
+	wrr "github.com/dubbogo/grpc-go/balancer/weightedroundrobin"
+	iwrr "github.com/dubbogo/grpc-go/balancer/weightedroundrobin/internal"
 
-	testgrpc "google.golang.org/grpc/interop/grpc_testing"
-	testpb "google.golang.org/grpc/interop/grpc_testing"
+	testgrpc "github.com/dubbogo/grpc-go/interop/grpc_testing"
+	testpb "github.com/dubbogo/grpc-go/interop/grpc_testing"
 )
 
 type s struct {

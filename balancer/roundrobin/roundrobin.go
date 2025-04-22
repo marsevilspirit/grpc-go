@@ -24,11 +24,11 @@ package roundrobin
 import (
 	"fmt"
 
-	"google.golang.org/grpc/balancer"
-	"google.golang.org/grpc/balancer/endpointsharding"
-	"google.golang.org/grpc/balancer/pickfirst/pickfirstleaf"
-	"google.golang.org/grpc/grpclog"
-	internalgrpclog "google.golang.org/grpc/internal/grpclog"
+	"github.com/dubbogo/grpc-go/balancer"
+	"github.com/dubbogo/grpc-go/balancer/endpointsharding"
+	"github.com/dubbogo/grpc-go/balancer/pickfirst/pickfirstleaf"
+	"github.com/dubbogo/grpc-go/grpclog"
+	internalgrpclog "github.com/dubbogo/grpc-go/internal/grpclog"
 )
 
 // Name is the name of round_robin balancer.
