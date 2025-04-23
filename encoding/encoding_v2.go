@@ -43,6 +43,17 @@ type CodecV2 interface {
 	Name() string
 }
 
+// TwoWayCodecV2 is directly used by triple network logic
+// It can specify the marshal and unmarshal logic of req and rsp
+type TwoWayCodecV2 interface {
+	MarshalRequest(any) (mem.BufferSlice, error)
+	MarshalResponse(any) (mem.BufferSlice, error)
+	UnmarshalRequest(data mem.BufferSlice, v any) error
+	UnmarshalResponse(data mem.BufferSlice, v any) error
+
+	Name() string
+}
+
 // RegisterCodecV2 registers the provided CodecV2 for use with all gRPC clients and
 // servers.
 //
@@ -60,7 +71,7 @@ type CodecV2 interface {
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe.  If multiple Codecs are
 // registered with the same name, the one registered last will take effect.
-func RegisterCodecV2(codec CodecV2) {
+func RegisterCodecV2(codec TwoWayCodecV2) {
 	if codec == nil {
 		panic("cannot register a nil CodecV2")
 	}
@@ -75,7 +86,7 @@ func RegisterCodecV2(codec CodecV2) {
 // registered for the content-subtype.
 //
 // The content-subtype is expected to be lowercase.
-func GetCodecV2(contentSubtype string) CodecV2 {
-	c, _ := registeredCodecs[contentSubtype].(CodecV2)
+func GetCodecV2(contentSubtype string) TwoWayCodecV2 {
+	c, _ := registeredCodecs[contentSubtype].(TwoWayCodecV2)
 	return c
 }

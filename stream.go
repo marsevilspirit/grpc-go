@@ -164,7 +164,7 @@ type ClientStream interface {
 func (cc *ClientConn) NewStream(ctx context.Context, desc *StreamDesc, method string, opts ...CallOption) (ClientStream, error) {
 	// allow interceptor to see all applicable call options, which means those
 	// configured as defaults from dial option as well as per-call options
-	opts = combine(cc.dopts.callOptions, opts)
+	opts = Combine(cc.dopts.callOptions, opts)
 
 	if cc.dopts.streamInt != nil {
 		return cc.dopts.streamInt(ctx, desc, cc, method, newClientStream, opts...)
@@ -172,9 +172,11 @@ func (cc *ClientConn) NewStream(ctx context.Context, desc *StreamDesc, method st
 	return newClientStream(ctx, desc, cc, method, opts...)
 }
 
+var streamStreamDesc = &StreamDesc{ServerStreams: true, ClientStreams: true}
+
 // NewClientStream is a wrapper for ClientConn.NewStream.
-func NewClientStream(ctx context.Context, desc *StreamDesc, cc *ClientConn, method string, opts ...CallOption) (ClientStream, error) {
-	return cc.NewStream(ctx, desc, method, opts...)
+func NewClientStream(ctx context.Context, cc *ClientConn, method string, opts ...CallOption) (ClientStream, error) {
+	return cc.NewStream(ctx, streamStreamDesc, method, opts...)
 }
 
 func newClientStream(ctx context.Context, desc *StreamDesc, cc *ClientConn, method string, opts ...CallOption) (_ ClientStream, err error) {
@@ -534,7 +536,7 @@ type clientStream struct {
 	cc       *ClientConn
 	desc     *StreamDesc
 
-	codec        baseCodec
+	codec        encoding.TwoWayCodecV2
 	compressorV0 Compressor
 	compressorV1 encoding.Compressor
 
@@ -909,7 +911,7 @@ func (cs *clientStream) SendMsg(m any) (err error) {
 	}
 
 	// load hdr, payload, data
-	hdr, data, payload, pf, err := prepareMsg(m, cs.codec, cs.compressorV0, cs.compressorV1, cs.cc.dopts.copts.BufferPool)
+	hdr, data, payload, pf, err := prepareMsg("req", m, cs.codec, cs.compressorV0, cs.compressorV1, cs.cc.dopts.copts.BufferPool)
 	if err != nil {
 		return err
 	}
@@ -1129,7 +1131,7 @@ func (a *csAttempt) recvMsg(m any, payInfo *payloadInfo) (err error) {
 		// Only initialize this state once per stream.
 		a.decompressorSet = true
 	}
-	if err := recv(a.parser, cs.codec, a.transportStream, a.decompressorV0, m, *cs.callInfo.maxReceiveMessageSize, payInfo, a.decompressorV1, false); err != nil {
+	if err := recv("rsp", a.parser, cs.codec, a.transportStream, a.decompressorV0, m, *cs.callInfo.maxReceiveMessageSize, payInfo, a.decompressorV1, false); err != nil {
 		if err == io.EOF {
 			if statusErr := a.transportStream.Status().Err(); statusErr != nil {
 				return statusErr
@@ -1162,7 +1164,7 @@ func (a *csAttempt) recvMsg(m any, payInfo *payloadInfo) (err error) {
 	}
 	// Special handling for non-server-stream rpcs.
 	// This recv expects EOF or errors, so we don't collect inPayload.
-	if err := recv(a.parser, cs.codec, a.transportStream, a.decompressorV0, m, *cs.callInfo.maxReceiveMessageSize, nil, a.decompressorV1, false); err == io.EOF {
+	if err := recv("rsp", a.parser, cs.codec, a.transportStream, a.decompressorV0, m, *cs.callInfo.maxReceiveMessageSize, nil, a.decompressorV1, false); err == io.EOF {
 		return a.transportStream.Status().Err() // non-server streaming Recv returns nil on success
 	} else if err != nil {
 		return toRPCErr(err)
@@ -1350,7 +1352,7 @@ type addrConnStream struct {
 	ctx              context.Context
 	sentLast         bool
 	desc             *StreamDesc
-	codec            baseCodec
+	codec            encoding.TwoWayCodecV2
 	sendCompressorV0 Compressor
 	sendCompressorV1 encoding.Compressor
 	decompressorSet  bool
@@ -1413,7 +1415,7 @@ func (as *addrConnStream) SendMsg(m any) (err error) {
 	}
 
 	// load hdr, payload, data
-	hdr, data, payload, pf, err := prepareMsg(m, as.codec, as.sendCompressorV0, as.sendCompressorV1, as.ac.dopts.copts.BufferPool)
+	hdr, data, payload, pf, err := prepareMsg("rsp", m, as.codec, as.sendCompressorV0, as.sendCompressorV1, as.ac.dopts.copts.BufferPool)
 	if err != nil {
 		return err
 	}
@@ -1469,7 +1471,7 @@ func (as *addrConnStream) RecvMsg(m any) (err error) {
 		// Only initialize this state once per stream.
 		as.decompressorSet = true
 	}
-	if err := recv(as.parser, as.codec, as.transportStream, as.decompressorV0, m, *as.callInfo.maxReceiveMessageSize, nil, as.decompressorV1, false); err != nil {
+	if err := recv("rsp", as.parser, as.codec, as.transportStream, as.decompressorV0, m, *as.callInfo.maxReceiveMessageSize, nil, as.decompressorV1, false); err != nil {
 		if err == io.EOF {
 			if statusErr := as.transportStream.Status().Err(); statusErr != nil {
 				return statusErr
@@ -1486,7 +1488,7 @@ func (as *addrConnStream) RecvMsg(m any) (err error) {
 
 	// Special handling for non-server-stream rpcs.
 	// This recv expects EOF or errors, so we don't collect inPayload.
-	if err := recv(as.parser, as.codec, as.transportStream, as.decompressorV0, m, *as.callInfo.maxReceiveMessageSize, nil, as.decompressorV1, false); err == io.EOF {
+	if err := recv("rsp", as.parser, as.codec, as.transportStream, as.decompressorV0, m, *as.callInfo.maxReceiveMessageSize, nil, as.decompressorV1, false); err == io.EOF {
 		return as.transportStream.Status().Err() // non-server streaming Recv returns nil on success
 	} else if err != nil {
 		return toRPCErr(err)
@@ -1575,7 +1577,7 @@ type serverStream struct {
 	ctx   context.Context
 	s     *transport.ServerStream
 	p     *parser
-	codec baseCodec
+	codec encoding.TwoWayCodecV2
 
 	compressorV0   Compressor
 	compressorV1   encoding.Compressor
@@ -1681,7 +1683,7 @@ func (ss *serverStream) SendMsg(m any) (err error) {
 	}
 
 	// load hdr, payload, data
-	hdr, data, payload, pf, err := prepareMsg(m, ss.codec, ss.compressorV0, ss.compressorV1, ss.p.bufferPool)
+	hdr, data, payload, pf, err := prepareMsg("rsp", m, ss.codec, ss.compressorV0, ss.compressorV1, ss.p.bufferPool)
 	if err != nil {
 		return err
 	}
@@ -1762,7 +1764,7 @@ func (ss *serverStream) RecvMsg(m any) (err error) {
 		payInfo = &payloadInfo{}
 		defer payInfo.free()
 	}
-	if err := recv(ss.p, ss.codec, ss.s, ss.decompressorV0, m, ss.maxReceiveMessageSize, payInfo, ss.decompressorV1, true); err != nil {
+	if err := recv("req", ss.p, ss.codec, ss.s, ss.decompressorV0, m, ss.maxReceiveMessageSize, payInfo, ss.decompressorV1, true); err != nil {
 		if err == io.EOF {
 			if len(ss.binlogs) != 0 {
 				chc := &binarylog.ClientHalfClose{}
@@ -1810,13 +1812,13 @@ func MethodFromServerStream(stream ServerStream) (string, bool) {
 // compression was made and therefore whether the payload needs to be freed in
 // addition to the returned data. Freeing the payload if the returned boolean is
 // false can lead to undefined behavior.
-func prepareMsg(m any, codec baseCodec, cp Compressor, comp encoding.Compressor, pool mem.BufferPool) (hdr []byte, data, payload mem.BufferSlice, pf payloadFormat, err error) {
+func prepareMsg(msgType string, m any, codec encoding.TwoWayCodecV2, cp Compressor, comp encoding.Compressor, pool mem.BufferPool) (hdr []byte, data, payload mem.BufferSlice, pf payloadFormat, err error) {
 	if preparedMsg, ok := m.(*PreparedMsg); ok {
 		return preparedMsg.hdr, preparedMsg.encodedData, preparedMsg.payload, preparedMsg.pf, nil
 	}
 	// The input interface is not a prepared msg.
 	// Marshal and Compress the data at this point
-	data, err = encode(codec, m)
+	data, err = encode(msgType, codec, m)
 	if err != nil {
 		return nil, nil, nil, 0, err
 	}

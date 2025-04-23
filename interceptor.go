@@ -20,10 +20,12 @@ package grpc
 
 import (
 	"context"
+
+	"github.com/dubbogo/grpc-go/metadata"
 )
 
 // UnaryInvoker is called by UnaryClientInterceptor to complete RPCs.
-type UnaryInvoker func(ctx context.Context, method string, req, reply any, cc *ClientConn, opts ...CallOption) error
+type UnaryInvoker func(ctx context.Context, method string, req, reply any, cc *ClientConn, opts ...CallOption) (metadata.MD, error)
 
 // UnaryClientInterceptor intercepts the execution of a unary RPC on the client.
 // Unary interceptors can be specified as a DialOption, using
@@ -40,7 +42,7 @@ type UnaryInvoker func(ctx context.Context, method string, req, reply any, cc *C
 // defaults from the ClientConn as well as per-call options.
 //
 // The returned error must be compatible with the status package.
-type UnaryClientInterceptor func(ctx context.Context, method string, req, reply any, cc *ClientConn, invoker UnaryInvoker, opts ...CallOption) error
+type UnaryClientInterceptor func(ctx context.Context, method string, req, reply any, cc *ClientConn, invoker UnaryInvoker, opts ...CallOption) (metadata.MD, error)
 
 // Streamer is called by StreamClientInterceptor to create a ClientStream.
 type Streamer func(ctx context.Context, desc *StreamDesc, cc *ClientConn, method string, opts ...CallOption) (ClientStream, error)

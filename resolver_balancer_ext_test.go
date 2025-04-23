@@ -122,7 +122,7 @@ func (s) TestResolverBuildFailure(t *testing.T) {
 	resErrCh <- errors.New(errStr)
 	ctx, cancel := context.WithTimeout(context.Background(), defaultTestTimeout)
 	defer cancel()
-	if err := cc.Invoke(ctx, "/a/b", nil, nil); err == nil || !strings.Contains(err.Error(), errStr) {
+	if _, err := cc.Invoke(ctx, "/a/b", nil, nil); err == nil || !strings.Contains(err.Error(), errStr) {
 		t.Fatalf("Invoke = %v; want %v", err, errStr)
 	}
 }

@@ -76,7 +76,7 @@ func NewBenchmarkServiceClient(cc grpc.ClientConnInterface) BenchmarkServiceClie
 func (c *benchmarkServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SimpleResponse)
-	err := c.cc.Invoke(ctx, BenchmarkService_UnaryCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, BenchmarkService_UnaryCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

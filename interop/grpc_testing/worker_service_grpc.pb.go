@@ -103,7 +103,7 @@ type WorkerService_RunClientClient = grpc.BidiStreamingClient[ClientArgs, Client
 func (c *workerServiceClient) CoreCount(ctx context.Context, in *CoreRequest, opts ...grpc.CallOption) (*CoreResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CoreResponse)
-	err := c.cc.Invoke(ctx, WorkerService_CoreCount_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, WorkerService_CoreCount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +113,7 @@ func (c *workerServiceClient) CoreCount(ctx context.Context, in *CoreRequest, op
 func (c *workerServiceClient) QuitWorker(ctx context.Context, in *Void, opts ...grpc.CallOption) (*Void, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Void)
-	err := c.cc.Invoke(ctx, WorkerService_QuitWorker_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, WorkerService_QuitWorker_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

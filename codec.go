@@ -29,8 +29,10 @@ import (
 // implementations. The omitted Name function is only needed for the register in
 // the encoding package and is not part of the core functionality.
 type baseCodec interface {
-	Marshal(v any) (mem.BufferSlice, error)
-	Unmarshal(data mem.BufferSlice, v any) error
+	MarshalRequest(any) (mem.BufferSlice, error)
+	MarshalResponse(any) (mem.BufferSlice, error)
+	UnmarshalRequest(data mem.BufferSlice, v any) error
+	UnmarshalResponse(data mem.BufferSlice, v any) error
 }
 
 // getCodec returns an encoding.CodecV2 for the codec of the given name (if
@@ -38,19 +40,19 @@ type baseCodec interface {
 // returns the V2 codec if it is registered. Otherwise, it checks the V1 registry
 // with encoding.GetCodec and if it is registered wraps it with newCodecV1Bridge
 // to turn it into an encoding.CodecV2. Returns nil otherwise.
-func getCodec(name string) encoding.CodecV2 {
-	if codecV1 := encoding.GetCodec(name); codecV1 != nil {
-		return newCodecV1Bridge(codecV1)
+func getCodec(name string) encoding.TwoWayCodecV2 {
+	if TwoWayCodec := encoding.GetCodec(name); TwoWayCodec != nil {
+		return newCodecV1Bridge(TwoWayCodec)
 	}
 
 	return encoding.GetCodecV2(name)
 }
 
-func newCodecV0Bridge(c Codec) baseCodec {
+func newCodecV0Bridge(c Codec) encoding.TwoWayCodecV2 {
 	return codecV0Bridge{codec: c}
 }
 
-func newCodecV1Bridge(c encoding.Codec) encoding.CodecV2 {
+func newCodecV1Bridge(c encoding.TwoWayCodec) encoding.TwoWayCodecV2 {
 	return codecV1Bridge{
 		codecV0Bridge: codecV0Bridge{codec: c},
 		name:          c.Name(),
@@ -61,24 +63,42 @@ var _ baseCodec = codecV0Bridge{}
 
 type codecV0Bridge struct {
 	codec interface {
-		Marshal(v any) ([]byte, error)
-		Unmarshal(data []byte, v any) error
+		MarshalRequest(interface{}) ([]byte, error)
+		MarshalResponse(interface{}) ([]byte, error)
+		UnmarshalRequest(data []byte, v interface{}) error
+		UnmarshalResponse(data []byte, v interface{}) error
 	}
 }
 
-func (c codecV0Bridge) Marshal(v any) (mem.BufferSlice, error) {
-	data, err := c.codec.Marshal(v)
+func (c codecV0Bridge) MarshalRequest(v any) (mem.BufferSlice, error) {
+	data, err := c.codec.MarshalRequest(v)
 	if err != nil {
 		return nil, err
 	}
 	return mem.BufferSlice{mem.SliceBuffer(data)}, nil
 }
 
-func (c codecV0Bridge) Unmarshal(data mem.BufferSlice, v any) (err error) {
-	return c.codec.Unmarshal(data.Materialize(), v)
+func (c codecV0Bridge) UnmarshalRequest(data mem.BufferSlice, v any) (err error) {
+	return c.codec.UnmarshalRequest(data.Materialize(), v)
 }
 
-var _ encoding.CodecV2 = codecV1Bridge{}
+func (c codecV0Bridge) MarshalResponse(v any) (mem.BufferSlice, error) {
+	data, err := c.codec.MarshalResponse(v)
+	if err != nil {
+		return nil, err
+	}
+	return mem.BufferSlice{mem.SliceBuffer(data)}, nil
+}
+
+func (c codecV0Bridge) UnmarshalResponse(data mem.BufferSlice, v any) (err error) {
+	return c.codec.UnmarshalResponse(data.Materialize(), v)
+}
+
+func (c codecV0Bridge) Name() string {
+	return "codecV0Bridge"
+}
+
+var _ encoding.TwoWayCodecV2 = codecV1Bridge{}
 
 type codecV1Bridge struct {
 	codecV0Bridge
@@ -95,11 +115,10 @@ func (c codecV1Bridge) Name() string {
 //
 // Deprecated: use encoding.Codec instead.
 type Codec interface {
-	// Marshal returns the wire format of v.
-	Marshal(v any) ([]byte, error)
-	// Unmarshal parses the wire format into v.
-	Unmarshal(data []byte, v any) error
-	// String returns the name of the Codec implementation.  This is unused by
-	// gRPC.
-	String() string
+	MarshalRequest(any) ([]byte, error)
+	MarshalResponse(any) ([]byte, error)
+	UnmarshalRequest(data []byte, v any) error
+	UnmarshalResponse(data []byte, v any) error
+
+	Name() string
 }

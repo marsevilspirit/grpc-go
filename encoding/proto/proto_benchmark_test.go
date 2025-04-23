@@ -68,7 +68,7 @@ func BenchmarkProtoCodec(b *testing.B) {
 			protoStructs := setupBenchmarkProtoCodecInputs(s)
 			name := fmt.Sprintf("MinPayloadSize:%v/SetParallelism(%v)", s, p)
 			b.Run(name, func(b *testing.B) {
-				codec := &codecV2{}
+				codec := &PBTwoWayCodec{}
 				b.SetParallelism(p)
 				b.RunParallel(func(pb *testing.PB) {
 					benchmarkProtoCodec(codec, protoStructs, pb, b)
@@ -78,7 +78,7 @@ func BenchmarkProtoCodec(b *testing.B) {
 	}
 }
 
-func benchmarkProtoCodec(codec *codecV2, protoStructs []proto.Message, pb *testing.PB, b *testing.B) {
+func benchmarkProtoCodec(codec *PBTwoWayCodec, protoStructs []proto.Message, pb *testing.PB, b *testing.B) {
 	counter := 0
 	for pb.Next() {
 		counter++
@@ -87,13 +87,13 @@ func benchmarkProtoCodec(codec *codecV2, protoStructs []proto.Message, pb *testi
 	}
 }
 
-func fastMarshalAndUnmarshal(codec encoding.CodecV2, protoStruct proto.Message, b *testing.B) {
-	marshaledBytes, err := codec.Marshal(protoStruct)
+func fastMarshalAndUnmarshal(codec encoding.TwoWayCodecV2, protoStruct proto.Message, b *testing.B) {
+	marshaledBytes, err := codec.MarshalRequest(protoStruct)
 	if err != nil {
 		b.Errorf("codec.Marshal(_) returned an error")
 	}
 	res := pb.Buffer{}
-	if err := codec.Unmarshal(marshaledBytes, &res); err != nil {
+	if err := codec.UnmarshalRequest(marshaledBytes, &res); err != nil {
 		b.Errorf("codec.Unmarshal(_) returned an error")
 	}
 }

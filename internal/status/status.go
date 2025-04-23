@@ -30,9 +30,13 @@ package status
 import (
 	"errors"
 	"fmt"
+	"runtime"
+	"strings"
 
-	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"github.com/dubbogo/grpc-go/codes"
+	perrors "github.com/pkg/errors"
+	"google.golang.org/genproto/googleapis/rpc/errdetails"
+	spb "google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/protoadapt"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -41,7 +45,8 @@ import (
 // Status represents an RPC status code, message, and details.  It is immutable
 // and should be created with New, Newf, or FromProto.
 type Status struct {
-	s *spb.Status
+	s     *spb.Status
+	stack *stack
 }
 
 // NewWithProto returns a new status including details from statusProto.  This
@@ -72,9 +77,26 @@ func NewWithProto(code codes.Code, message string, statusProto []string) *Status
 	}
 }
 
-// New returns a Status representing c and msg.
+// New returns a Status representing c and msg, with user-made error as stack
 func New(c codes.Code, msg string) *Status {
-	return &Status{s: &spb.Status{Code: int32(c), Message: msg}}
+	newStatus := &Status{s: &spb.Status{Code: int32(c), Message: msg}}
+	newStatusWithDetail, _ := newStatus.WithDetails(&errdetails.DebugInfo{
+		StackEntries: []string{
+			fmt.Sprintf("%+v", callers().StackTrace()), // use e.String() as triple stack
+		},
+	})
+	return newStatusWithDetail
+}
+
+// New returns a Status representing c and msg.
+func NewWithoutStacks(c codes.Code, e error) *Status {
+	newStatus := &Status{s: &spb.Status{Code: int32(c), Message: e.Error()}}
+	newStatusWithDetail, _ := newStatus.WithDetails(&errdetails.DebugInfo{
+		StackEntries: []string{
+			fmt.Sprintf("%+v", e), // use e.String() as triple stack
+		},
+	})
+	return newStatusWithDetail
 }
 
 // Newf returns New(c, fmt.Sprintf(format, a...)).
@@ -199,22 +221,44 @@ func (s *Status) Details() []any {
 }
 
 func (s *Status) String() string {
-	return fmt.Sprintf("rpc error: code = %s desc = %s", s.Code(), s.Message())
+	return fmt.Sprintf("%s", s.Message())
 }
 
 // Error wraps a pointer of a status proto. It implements error and Status,
 // and a nil *Error should never be returned by this package.
 type Error struct {
-	s *Status
+	s     *Status
+	stack stack
 }
 
 func (e *Error) Error() string {
 	return e.s.String()
 }
 
+func (e *Error) Message() string {
+	return e.s.String()
+}
+
+func (e *Error) Code() codes.Code {
+	return e.s.Code()
+}
+
 // GRPCStatus returns the Status represented by se.
 func (e *Error) GRPCStatus() *Status {
 	return e.s
+}
+
+// Status returns the Status represented by se.
+func (e *Error) Stacks() string {
+	if e.s == nil {
+		return ""
+	}
+	if len(e.s.s.Details) == 0 {
+		return ""
+	}
+	stackTracesStr := strings.Replace(e.s.s.Details[0].String(), `\n`, "\n", -1)
+	stackTracesStr = strings.Replace(stackTracesStr, `\t`, "\t", -1)
+	return stackTracesStr
 }
 
 // Is implements future error.Is functionality.
@@ -235,4 +279,36 @@ func IsRestrictedControlPlaneCode(s *Status) bool {
 		return true
 	}
 	return false
+}
+
+// stack represents a stack of program counters.
+type stack []uintptr
+
+func (s *stack) Format(st fmt.State, verb rune) {
+	switch verb {
+	case 'v':
+		switch {
+		case st.Flag('+'):
+			for _, pc := range *s {
+				f := perrors.Frame(pc)
+				fmt.Fprintf(st, "\n%+v", f)
+			}
+		}
+	}
+}
+
+func (s *stack) StackTrace() perrors.StackTrace {
+	f := make([]perrors.Frame, len(*s))
+	for i := 0; i < len(f); i++ {
+		f[i] = perrors.Frame((*s)[i])
+	}
+	return f
+}
+
+func callers() *stack {
+	const depth = 32
+	var pcs [depth]uintptr
+	n := runtime.Callers(5, pcs[:])
+	var st stack = pcs[0:n]
+	return &st
 }

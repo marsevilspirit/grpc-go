@@ -92,7 +92,7 @@ func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
 func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, TestService_EmptyCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, TestService_EmptyCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ func (c *testServiceClient) EmptyCall(ctx context.Context, in *Empty, opts ...gr
 func (c *testServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SimpleResponse)
-	err := c.cc.Invoke(ctx, TestService_UnaryCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, TestService_UnaryCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (c *testServiceClient) UnaryCall(ctx context.Context, in *SimpleRequest, op
 func (c *testServiceClient) CacheableUnaryCall(ctx context.Context, in *SimpleRequest, opts ...grpc.CallOption) (*SimpleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SimpleResponse)
-	err := c.cc.Invoke(ctx, TestService_CacheableUnaryCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, TestService_CacheableUnaryCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -180,7 +180,7 @@ type TestService_HalfDuplexCallClient = grpc.BidiStreamingClient[StreamingOutput
 func (c *testServiceClient) UnimplementedCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, TestService_UnimplementedCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, TestService_UnimplementedCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -456,7 +456,7 @@ func NewUnimplementedServiceClient(cc grpc.ClientConnInterface) UnimplementedSer
 func (c *unimplementedServiceClient) UnimplementedCall(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, UnimplementedService_UnimplementedCall_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, UnimplementedService_UnimplementedCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -566,7 +566,7 @@ func NewReconnectServiceClient(cc grpc.ClientConnInterface) ReconnectServiceClie
 func (c *reconnectServiceClient) Start(ctx context.Context, in *ReconnectParams, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, ReconnectService_Start_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, ReconnectService_Start_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -576,7 +576,7 @@ func (c *reconnectServiceClient) Start(ctx context.Context, in *ReconnectParams,
 func (c *reconnectServiceClient) Stop(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ReconnectInfo, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReconnectInfo)
-	err := c.cc.Invoke(ctx, ReconnectService_Stop_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, ReconnectService_Stop_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -712,7 +712,7 @@ func NewLoadBalancerStatsServiceClient(cc grpc.ClientConnInterface) LoadBalancer
 func (c *loadBalancerStatsServiceClient) GetClientStats(ctx context.Context, in *LoadBalancerStatsRequest, opts ...grpc.CallOption) (*LoadBalancerStatsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoadBalancerStatsResponse)
-	err := c.cc.Invoke(ctx, LoadBalancerStatsService_GetClientStats_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, LoadBalancerStatsService_GetClientStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -722,7 +722,7 @@ func (c *loadBalancerStatsServiceClient) GetClientStats(ctx context.Context, in 
 func (c *loadBalancerStatsServiceClient) GetClientAccumulatedStats(ctx context.Context, in *LoadBalancerAccumulatedStatsRequest, opts ...grpc.CallOption) (*LoadBalancerAccumulatedStatsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoadBalancerAccumulatedStatsResponse)
-	err := c.cc.Invoke(ctx, LoadBalancerStatsService_GetClientAccumulatedStats_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, LoadBalancerStatsService_GetClientAccumulatedStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -865,7 +865,7 @@ func NewHookServiceClient(cc grpc.ClientConnInterface) HookServiceClient {
 func (c *hookServiceClient) Hook(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, HookService_Hook_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, HookService_Hook_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -875,7 +875,7 @@ func (c *hookServiceClient) Hook(ctx context.Context, in *Empty, opts ...grpc.Ca
 func (c *hookServiceClient) SetReturnStatus(ctx context.Context, in *SetReturnStatusRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, HookService_SetReturnStatus_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, HookService_SetReturnStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -885,7 +885,7 @@ func (c *hookServiceClient) SetReturnStatus(ctx context.Context, in *SetReturnSt
 func (c *hookServiceClient) ClearReturnStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, HookService_ClearReturnStatus_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, HookService_ClearReturnStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,7 +1051,7 @@ func NewXdsUpdateHealthServiceClient(cc grpc.ClientConnInterface) XdsUpdateHealt
 func (c *xdsUpdateHealthServiceClient) SetServing(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, XdsUpdateHealthService_SetServing_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, XdsUpdateHealthService_SetServing_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1061,7 +1061,7 @@ func (c *xdsUpdateHealthServiceClient) SetServing(ctx context.Context, in *Empty
 func (c *xdsUpdateHealthServiceClient) SetNotServing(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, XdsUpdateHealthService_SetNotServing_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, XdsUpdateHealthService_SetNotServing_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1071,7 +1071,7 @@ func (c *xdsUpdateHealthServiceClient) SetNotServing(ctx context.Context, in *Em
 func (c *xdsUpdateHealthServiceClient) SendHookRequest(ctx context.Context, in *HookRequest, opts ...grpc.CallOption) (*HookResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(HookResponse)
-	err := c.cc.Invoke(ctx, XdsUpdateHealthService_SendHookRequest_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, XdsUpdateHealthService_SendHookRequest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1231,7 +1231,7 @@ func NewXdsUpdateClientConfigureServiceClient(cc grpc.ClientConnInterface) XdsUp
 func (c *xdsUpdateClientConfigureServiceClient) Configure(ctx context.Context, in *ClientConfigureRequest, opts ...grpc.CallOption) (*ClientConfigureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ClientConfigureResponse)
-	err := c.cc.Invoke(ctx, XdsUpdateClientConfigureService_Configure_FullMethodName, in, out, cOpts...)
+	_, err := c.cc.Invoke(ctx, XdsUpdateClientConfigureService_Configure_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}

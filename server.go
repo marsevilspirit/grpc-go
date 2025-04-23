@@ -152,7 +152,7 @@ type Server struct {
 
 type serverOptions struct {
 	creds                 credentials.TransportCredentials
-	codec                 baseCodec
+	codec                 encoding.TwoWayCodecV2
 	cp                    Compressor
 	dc                    Decompressor
 	unaryInt              UnaryServerInterceptor
@@ -179,6 +179,7 @@ type serverOptions struct {
 	numServerWorkers      uint32
 	bufferPool            mem.BufferPool
 	waitForHandlers       bool
+	proxyModeEnable       bool
 }
 
 var defaultServerOptions = serverOptions{
@@ -251,6 +252,14 @@ func newJoinServerOption(opts ...ServerOption) ServerOption {
 func SharedWriteBuffer(val bool) ServerOption {
 	return newFuncServerOption(func(o *serverOptions) {
 		o.sharedWriteBuffer = val
+	})
+}
+
+// ProxyModeEnable enable grpc server proxy mechanism.
+// grpc will search proxy service to handle stream when it does not find target service key
+func ProxyModeEnable(enable bool) ServerOption {
+	return newFuncServerOption(func(o *serverOptions) {
+		o.proxyModeEnable = enable
 	})
 }
 
@@ -347,7 +356,7 @@ func CustomCodec(codec Codec) ServerOption {
 //
 // Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
-func ForceServerCodec(codec encoding.Codec) ServerOption {
+func ForceServerCodec(codec encoding.TwoWayCodec) ServerOption {
 	return newFuncServerOption(func(o *serverOptions) {
 		o.codec = newCodecV1Bridge(codec)
 	})
@@ -362,7 +371,7 @@ func ForceServerCodec(codec encoding.Codec) ServerOption {
 //
 // Notice: This API is EXPERIMENTAL and may be changed or removed in a
 // later release.
-func ForceServerCodecV2(codecV2 encoding.CodecV2) ServerOption {
+func ForceServerCodecV2(codecV2 encoding.TwoWayCodecV2) ServerOption {
 	return newFuncServerOption(func(o *serverOptions) {
 		o.codec = codecV2
 	})
@@ -1143,7 +1152,7 @@ func (s *Server) incrCallsFailed() {
 }
 
 func (s *Server) sendResponse(ctx context.Context, stream *transport.ServerStream, msg any, cp Compressor, opts *transport.WriteOptions, comp encoding.Compressor) error {
-	data, err := encode(s.getCodec(stream.ContentSubtype()), msg)
+	data, err := encode("rsp", s.getCodec(stream.ContentSubtype()), msg)
 	if err != nil {
 		channelz.Error(logger, s.channelz, "grpc: server failed to encode response: ", err)
 		return err
@@ -1218,7 +1227,7 @@ func getChainUnaryHandler(interceptors []UnaryServerInterceptor, curr int, info 
 	}
 }
 
-func (s *Server) processUnaryRPC(ctx context.Context, stream *transport.ServerStream, info *serviceInfo, md *MethodDesc, trInfo *traceInfo) (err error) {
+func (s *Server) processUnaryRPC(ctx context.Context, method string, stream *transport.ServerStream, info *serviceInfo, md *MethodDesc, trInfo *traceInfo) (err error) {
 	shs := s.opts.statsHandlers
 	if len(shs) != 0 || trInfo != nil || channelz.IsOn() {
 		if channelz.IsOn() {
@@ -1375,7 +1384,7 @@ func (s *Server) processUnaryRPC(ctx context.Context, stream *transport.ServerSt
 	defer dataFree()
 	df := func(v any) error {
 		defer dataFree()
-		if err := s.getCodec(stream.ContentSubtype()).Unmarshal(d, v); err != nil {
+		if err := s.getCodec(stream.ContentSubtype()).UnmarshalRequest(d, v); err != nil {
 			return status.Errorf(codes.Internal, "grpc: error unmarshalling request: %v", err)
 		}
 
@@ -1402,14 +1411,16 @@ func (s *Server) processUnaryRPC(ctx context.Context, stream *transport.ServerSt
 		return nil
 	}
 	ctx = NewContextWithServerTransportStream(ctx, stream)
+	ctx = context.WithValue(ctx, "XXX_TRIPLE_GO_METHOD_NAME", method)
+	ctx = context.WithValue(ctx, "XXX_TRIPLE_GO_INTERFACE_NAME", stream.Method())
+	ctx = context.WithValue(ctx, "XXX_TRIPLE_GO_GENERIC_PAYLOAD", d)
 	reply, appErr := md.Handler(info.serviceImpl, ctx, df, s.opts.unaryInt)
 	if appErr != nil {
 		appStatus, ok := status.FromError(appErr)
 		if !ok {
 			// Convert non-status application error to a status error with code
 			// Unknown, but handle context errors specifically.
-			appStatus = status.FromContextError(appErr)
-			appErr = appStatus.Err()
+			appStatus = status.ErrorWithoutStacks(codes.Unknown, appErr)
 		}
 		if trInfo != nil {
 			trInfo.tr.LazyLog(stringer(appStatus.Message()), true)
@@ -1443,6 +1454,32 @@ func (s *Server) processUnaryRPC(ctx context.Context, stream *transport.ServerSt
 		trInfo.tr.LazyLog(stringer("OK"), false)
 	}
 	opts := &transport.WriteOptions{Last: true}
+
+	var rawReplyStruct interface{}
+	responseAttachment := make(metadata.MD) // todo make it useful
+
+	if result, ok := reply.(OuterResult); ok {
+		// proceess header trailer
+		outerAttachment := result.Attachments()
+		responseAttachment = make(metadata.MD, len(outerAttachment))
+		channelz.Infof(logger, s.channelz, "unaryProcessor.processUnaryRPC: get outerAttachment = %+v", outerAttachment)
+		for k, v := range outerAttachment {
+			if str, ok := v.(string); ok {
+				responseAttachment[k] = []string{str}
+			} else if strs, ok := v.([]string); ok {
+				responseAttachment[k] = strs
+			}
+			// todo deal with unsupported attachment
+		}
+		channelz.Infof(logger, s.channelz, "unaryProcessor.processUnaryRPC: get triple attachment = %+v", responseAttachment)
+		rawReplyStruct = result.Result()
+		channelz.Infof(logger, s.channelz, "unaryProcessor.processUnaryRPC: get reply %+v to be marshal", rawReplyStruct)
+	} else {
+		channelz.Infof(logger, s.channelz, "unaryProcessor.processUnaryRPC: DEPRECATED! reply from service not impl common.OuterResult")
+		rawReplyStruct = reply
+	}
+
+	stream.SetTrailer(responseAttachment)
 
 	// Server handler could have set new compressor by calling SetSendCompressor.
 	// In case it is set, we need to use it for compressing outbound message.
@@ -1512,6 +1549,15 @@ func (s *Server) processUnaryRPC(ctx context.Context, stream *transport.ServerSt
 	}
 	return stream.WriteStatus(statusOK)
 }
+
+// OuterResult is a dubbo RPC result
+type OuterResult interface {
+	// Result gets invoker result.
+	Result() interface{}
+	// Attachments gets all attachments
+	Attachments() map[string]interface{}
+}
+type TripleAttachment map[string]string
 
 // chainStreamServerInterceptors chains all stream server interceptors into one.
 func chainStreamServerInterceptors(s *Server) {
@@ -1789,6 +1835,7 @@ func (s *Server) handleStream(t transport.ServerTransport, stream *transport.Ser
 	}
 	service := sm[:pos]
 	method := sm[pos+1:]
+	method = strings.ToUpper(string(method[0])) + method[1:]
 
 	// FromIncomingContext is expensive: skip if there are no statsHandlers
 	if len(s.opts.statsHandlers) > 0 {
@@ -1811,8 +1858,12 @@ func (s *Server) handleStream(t transport.ServerTransport, stream *transport.Ser
 
 	srv, knownService := s.services[service]
 	if knownService {
+		if md, ok := srv.methods["InvokeWithArgs"]; ok {
+			s.processUnaryRPC(ctx, method, stream, srv, md, ti)
+			return
+		}
 		if md, ok := srv.methods[method]; ok {
-			s.processUnaryRPC(ctx, stream, srv, md, ti)
+			s.processUnaryRPC(ctx, method, stream, srv, md, ti)
 			return
 		}
 		if sd, ok := srv.streams[method]; ok {
@@ -1820,6 +1871,17 @@ func (s *Server) handleStream(t transport.ServerTransport, stream *transport.Ser
 			return
 		}
 	}
+
+	// grpc proxy mode
+	if s.opts.proxyModeEnable {
+		// same with in triple.constant.ProxyServiceKey
+		srv, knownService = s.services["github.com.dubbogo.triple.proxy"]
+		if md, ok := srv.methods["InvokeWithArgs"]; ok {
+			s.processUnaryRPC(ctx, method, stream, srv, md, ti)
+			return
+		}
+	}
+
 	// Unknown service, or known server unknown method.
 	if unknownDesc := s.opts.unknownStreamDesc; unknownDesc != nil {
 		s.processStreamingRPC(ctx, stream, nil, unknownDesc, ti)
@@ -1983,7 +2045,7 @@ func (s *Server) closeListenersLocked() {
 
 // contentSubtype must be lowercase
 // cannot return nil
-func (s *Server) getCodec(contentSubtype string) baseCodec {
+func (s *Server) getCodec(contentSubtype string) encoding.TwoWayCodecV2 {
 	if s.opts.codec != nil {
 		return s.opts.codec
 	}

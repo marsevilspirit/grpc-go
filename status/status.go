@@ -59,9 +59,14 @@ func Error(c codes.Code, msg string) error {
 	return New(c, msg).Err()
 }
 
+// Error returns an error representing c and msg.  If c is OK, returns nil.
+func ErrorWithoutStacks(c codes.Code, e error) *Status {
+	return status.NewWithoutStacks(c, e)
+}
+
 // Errorf returns Error(c, fmt.Sprintf(format, a...)).
 func Errorf(c codes.Code, format string, a ...any) error {
-	return Error(c, fmt.Sprintf(format, a...))
+	return New(c, fmt.Sprintf(format, a...)).Err()
 }
 
 // ErrorProto returns an error representing s.  If s.Code is OK, returns nil.

@@ -80,6 +80,17 @@ func GetCompressor(name string) Compressor {
 	return registeredCompressor[name]
 }
 
+// TwoWayCodec is directly used by triple network logic
+// It can specify the marshal and unmarshal logic of req and rsp
+type TwoWayCodec interface {
+	MarshalRequest(any) ([]byte, error)
+	MarshalResponse(any) ([]byte, error)
+	UnmarshalRequest(data []byte, v any) error
+	UnmarshalResponse(data []byte, v any) error
+
+	Name() string
+}
+
 // Codec defines the interface gRPC uses to encode and decode messages.  Note
 // that implementations of this interface must be thread safe; a Codec's
 // methods can be called from concurrent goroutines.
@@ -110,7 +121,7 @@ var registeredCodecs = make(map[string]any)
 // NOTE: this function must only be called during initialization time (i.e. in
 // an init() function), and is not thread-safe.  If multiple Codecs are
 // registered with the same name, the one registered last will take effect.
-func RegisterCodec(codec Codec) {
+func RegisterCodec(codec TwoWayCodec) {
 	if codec == nil {
 		panic("cannot register a nil Codec")
 	}
@@ -125,7 +136,7 @@ func RegisterCodec(codec Codec) {
 // registered for the content-subtype.
 //
 // The content-subtype is expected to be lowercase.
-func GetCodec(contentSubtype string) Codec {
-	c, _ := registeredCodecs[contentSubtype].(Codec)
+func GetCodec(contentSubtype string) TwoWayCodec {
+	c, _ := registeredCodecs[contentSubtype].(TwoWayCodec)
 	return c
 }
